@@ -28,4 +28,18 @@ public class KafkaEventController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();		
 		}
 	}
+	
+	@GetMapping("/bulk-publish/{message}")
+	public ResponseEntity<?> publishBulkMessages(@PathVariable String message) {
+		try {
+			for(int i = 0; i < 10000; i++) {
+				messagePublisher.sendMessageToTopic(message+"__"+i);
+			}
+			return ResponseEntity.ok("Message published successfully !!");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();		
+		}
+	}
 }
