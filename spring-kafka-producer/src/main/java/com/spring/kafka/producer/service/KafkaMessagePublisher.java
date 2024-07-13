@@ -7,7 +7,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
-import com.spring.kafka.producer.dto.Employee;
+import com.spring.kafka.dto.Employee;
 
 @Service
 public class KafkaMessagePublisher {
@@ -16,7 +16,7 @@ public class KafkaMessagePublisher {
 	private KafkaTemplate<String, Object> template;
 
 	public void sendMessageToTopic(String message) {
-		CompletableFuture<SendResult<String, Object>> future = template.send("Keerthi-new-topic", message);
+		CompletableFuture<SendResult<String, Object>> future = template.send("dummy-topic", message);
 		future.whenComplete((result, ex) -> {
 			if (ex == null) {
 				System.out.println(
@@ -28,7 +28,8 @@ public class KafkaMessagePublisher {
 	}
 	
 	public void sendCustomMessageToTopic(Employee employee) {
-		CompletableFuture<SendResult<String, Object>> future = template.send("Keerthi-custom-topic", employee.toString());
+		//CompletableFuture<SendResult<String, Object>> future = template.send("employee-topic", employee.toString());
+		CompletableFuture<SendResult<String, Object>> future = template.send("employee-topic", employee);
 		future.whenComplete((result, ex) -> {
 			if (ex == null) {
 				System.out.println(

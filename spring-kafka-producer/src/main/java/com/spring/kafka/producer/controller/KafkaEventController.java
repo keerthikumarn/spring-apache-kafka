@@ -6,10 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.kafka.producer.dto.Employee;
+import com.spring.kafka.dto.Employee;
 import com.spring.kafka.producer.service.KafkaMessagePublisher;
 
 @RestController
@@ -46,7 +47,7 @@ public class KafkaEventController {
 	}
 	
 	@PostMapping("/custom-publish")
-	public ResponseEntity<?> publishCustomMessage(Employee employee) {
+	public ResponseEntity<?> publishCustomMessage(@RequestBody Employee employee) {
 		try {
 			messagePublisher.sendCustomMessageToTopic(employee);
 			return ResponseEntity.ok("Custom message published successfully !!");

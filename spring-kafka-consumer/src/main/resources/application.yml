@@ -1,6 +1,6 @@
 server:
   port: 9292
-  
+      
 spring:
   kafka:
     consumer:
@@ -12,4 +12,7 @@ spring:
         spring:
           json:
             trusted:
-              packages: com.spring.kafka.producer.dto
+              packages : com.spring.kafka.dto
+            #value:
+              #default:
+                #type: com.spring.kafka.dto.Employee
