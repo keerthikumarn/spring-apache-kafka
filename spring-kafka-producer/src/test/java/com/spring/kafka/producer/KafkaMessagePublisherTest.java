@@ -26,6 +26,7 @@ public class KafkaMessagePublisherTest {
 	@Autowired
 	private KafkaMessagePublisher producer;
 	
+	@DynamicPropertySource
 	public void initKafkaProperties(DynamicPropertyRegistry registry) {
 		registry.add("spring.kafka.bootstrap-servers", kafka::getBootstrapServers);
 	}
